@@ -1,11 +1,13 @@
+import java.time.LocalDate;
+
 public class Datausage {
 
     private int userData;
-    private int date;
+    private LocalDate date;
     private String unitType;
 
 
-    public Datausage(int userData, int date, String unitType) {
+    public Datausage(int userData, LocalDate date, String unitType) {
         this.date = date;
         this.unitType = unitType;
         this.userData = userData;
@@ -15,7 +17,7 @@ public class Datausage {
         return userData;
     }
 
-    public int getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -27,7 +29,7 @@ public class Datausage {
         this.userData = userData;
     }
 
-    public void setDate(int date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

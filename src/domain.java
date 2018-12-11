@@ -9,21 +9,24 @@ public class domain {
 
     public static void main(String args[]) {
         Bbr test = BbrHandler.createBbrManuelt(1234, "gade", 55, 9999, 100, "house");
-        Meter meter = new Meter("heat", 1234, 1, test);
+        Meter meter = new Meter( 1234, 1, test);
         LocalDate today = LocalDate.now();
-        meter.addReading(1000, "flow", today);
+        Channel channelTest = new Channel("heat", new ArrayList<>());
+        ArrayList<Channel> channelList = new ArrayList();
+        channelList.add(channelTest);
+        meter.setChannels(channelList);
         for (int i = 0; i < 100; i++) {
             Random random = new Random();
             int n = random.nextInt(100) + 1;
-            meter.addReading(n, "flow", today);
+            channelTest.addNewDatausage(n, today, "joule");
 
         }
 
 
         String output = meter.generateOutput();
         System.out.println(output);
-        System.out.println(meter.getLocation());
-        createCsvFile("c:/test/test3", output);
+
+
 
     }
 

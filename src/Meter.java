@@ -2,35 +2,27 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Meter {
-    private ArrayList<Reading> readings = new ArrayList<>();
-    private String MeasureType;
+    private ArrayList<Channel> channels = new ArrayList<>();
     private int number;
     private int isActive;
     private Bbr location;
 
-    public Meter(String measureType, int number, int isActive, Bbr location) {
+    public Meter(int number, int isActive, Bbr location) {
 
-        MeasureType = measureType;
+
         this.number = number;
         this.isActive = isActive;
         this.location = location;
     }
 
-    public ArrayList<Reading> getReadings() {
-        return readings;
+    public ArrayList<Channel> getChannels() {
+        return channels;
     }
 
-    public void setReadings(ArrayList<Reading> readings) {
-        this.readings = readings;
+    public void setChannels(ArrayList<Channel> channels) {
+        this.channels = channels;
     }
 
-    public String getMeasureType() {
-        return MeasureType;
-    }
-
-    public void setMeasureType(String measureType) {
-        MeasureType = measureType;
-    }
 
     public int getNumber() {
         return number;
@@ -57,24 +49,34 @@ public class Meter {
         this.location = location;
     }
 
-    public void addReading(int value1, String type, LocalDate date){
-        Reading reading = new Reading(value1, type, date);
-        readings.add(reading);
+    public void addChannel(String measureType){
+        Channel channel = new Channel(measureType, new ArrayList<>());
+        channels.add(channel);
     }
 
     public String generateOutput(){
 
         String allOutput = "";
 
-        for (Reading reading: readings) {
-        String output;
-        int value = reading.getValue1();
-        String type = reading.getType();
-        LocalDate date = reading.getDate();
-        String measureType = this.MeasureType;
-        int number = this.number;
-        output = date + ", " + value + ", " + type + ", " + measureType + ", " + number + ", " + isActive + "\n";
-        allOutput += output;
+        for (Channel channel: channels) {
+            for (Datausage datausage: channel.getComsumptionData()){
+                int userData = datausage.getUserData();
+                LocalDate date= datausage.getDate();
+                String unitType = datausage.getUnitType();
+
+                String type = channel.getMeasureType();
+
+                int number = this.number;
+                int isActive = this.isActive;
+                Bbr bbr = this.location;
+                String output = date + ", " + number + ", " + type + ", " + userData + ", " + unitType + ", " + isActive +  ", " + bbr + "\n";
+                allOutput += output;
+            }
+
+
+
+
+
 
         }
         return allOutput;
