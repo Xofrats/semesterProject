@@ -8,7 +8,7 @@ import java.util.Random;
 public class domain {
 
     public static void main(String args[]) {
-        Bbr test = BbrHandler.createBbrManuelt(1234, "gade", 55, 9999, 100, "house");
+        Bbr test = BbrHandler.createBbrManuelt(9876, "gade", 55, 9999, 100, "house");
         Meter meter = new Meter( 1234, 1, test);
         LocalDate today = LocalDate.now();
         Channel channelTest = new Channel("heat", new ArrayList<>());
@@ -25,6 +25,7 @@ public class domain {
 
         String output = meter.generateOutput();
         System.out.println(output);
+        createCsvFile("c:/test/test3", output);
 
 
 

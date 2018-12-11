@@ -69,13 +69,11 @@ public class Bbr {
 //toString
     @Override
     public String toString() {
-        return "Bbr{" +
-                "propertyNumber=" + propertyNumber +
-                ", address='" + address + '\'' +
-                ", houseNumber=" + houseNumber +
-                ", zipCode=" + zipCode +
-                ", heatedSquareMeters=" + heatedSquareMeters +
-                ", propertyType='" + propertyType + '\'' +
-                '}';
+        return  propertyNumber +
+                ", " + address +
+                ", " + houseNumber +
+                ", " + zipCode +
+                ", " + heatedSquareMeters +
+                ", " + propertyType;
     }
 }
