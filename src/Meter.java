@@ -50,8 +50,9 @@ public class Meter {
     }
 
     public void addChannel(String measureType){
-        Channel channel = new Channel(measureType, new ArrayList<>());
+        Channel channel = new Channel(measureType);
         channels.add(channel);
+
     }
 
     public String generateOutput(){
@@ -65,11 +66,12 @@ public class Meter {
                 String unitType = datausage.getUnitType();
 
                 String type = channel.getMeasureType();
+                int total = channel.getTotal();
 
                 int number = this.number;
                 int isActive = this.isActive;
                 Bbr bbr = this.location;
-                String output = date + ", " + number + ", " + type + ", " + userData + ", " + unitType + ", " + isActive +  ", " + bbr + "\n";
+                String output = date + ", " + number + ", " + type + ", " + userData + ", " + unitType +  ", " + total + ", " + isActive +  ", " + bbr + "\n";
                 allOutput += output;
             }
 
