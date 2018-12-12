@@ -1,3 +1,5 @@
+package BBR;
+
 public class Bbr {
     private int propertyNumber;
     private String address;
