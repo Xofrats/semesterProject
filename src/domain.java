@@ -13,6 +13,8 @@ import java.util.Random;
 public class domain {
 
     public static void main(String args[]) {
+
+        System.out.println("abe");
         Bbr test = BbrHandler.createBbrManuelt(9876, "gade", 55, 9999, 100, "house");
         Meter meter = new Meter( 1234, 1, test);
         LocalDate today = LocalDate.now();
