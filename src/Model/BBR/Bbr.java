@@ -1,4 +1,4 @@
-package BBR;
+package Model.BBR;
 
 public class Bbr {
     private int propertyNumber;

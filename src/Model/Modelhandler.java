@@ -1,7 +1,9 @@
-import BBR.Bbr;
+package Model;
+
+import Model.BBR.Bbr;
 import Handlers.BbrHandler;
-import Meter.Meter;
-import Meter.Channel;
+import Model.Meter.Meter;
+import Model.Meter.Channel;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,7 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class domain {
+public class Modelhandler {
 
     public static void main(String args[]) {
 

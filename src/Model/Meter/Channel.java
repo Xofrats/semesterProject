@@ -1,6 +1,4 @@
-package Meter;
-
-import Meter.Datausage;
+package Model.Meter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

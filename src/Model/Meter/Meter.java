@@ -1,6 +1,6 @@
-package Meter;
+package Model.Meter;
 
-import BBR.Bbr;
+import Model.BBR.Bbr;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package Meter;
+package Model.Meter;
 
 import java.time.LocalDate;
 

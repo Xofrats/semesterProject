@@ -1,8 +1,7 @@
 package Handlers;
 
-import BBR.Bbr;
-import Handlers.BbrHandler;
-import Meter.Meter;
+import Model.BBR.Bbr;
+import Model.Meter.Meter;
 
 public class meterHandler {
 

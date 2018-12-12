@@ -1,10 +1,10 @@
 package Handlers;
 
-import BBR.Bbr;
+import Model.BBR.Bbr;
 
 import java.util.ArrayList;
 
-//BBR Handler
+//Model.BBR Handler
 public class BbrHandler {
     private static ArrayList<Bbr> allBbr = new ArrayList<>();
 
