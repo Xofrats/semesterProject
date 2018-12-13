@@ -22,14 +22,14 @@ public class Modelhandler {
 
         Meter meter = meterHandler.createMeterAuto(1111, 1, BbrHandler.getAllBbr().get(5));
         Meter meter2 = meterHandler.createMeterAuto(2222, 1, BbrHandler.getAllBbr().get(7));
-        meter.addChannel(DataGenerator.randomChannel("heat", 1, "joule"));
+        meter.addChannel(DataGenerator.randomChannel("", 1, "joule"));
         meter.addChannel(DataGenerator.randomChannel("water", 1, "flow"));
-        meter2.addChannel(DataGenerator.randomChannel("heat", 1, "joule"));
+        meter2.addChannel(DataGenerator.randomChannel("heat", 1, ""));
 
         Meter meter3 = DataGenerator.randomMeter();
         meter3.addChannel(DataGenerator.randomChannel("water", 1, "temperature"));
 
-        System.out.println(meterHandler.getAllMeters());
+        System.out.println(meterHandler.dataValidation());
 
         String output = meterHandler.allMetersOutput();
        // createCsvFile("c:/test/test3", output);
@@ -37,6 +37,8 @@ public class Modelhandler {
 
 
     }
+
+
 
     public static void createCsvFile(String fileName, String str) {
 

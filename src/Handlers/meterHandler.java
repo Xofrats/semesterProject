@@ -1,6 +1,8 @@
 package Handlers;
 
 import Model.BBR.Bbr;
+import Model.Meter.Channel;
+import Model.Meter.Datausage;
 import Model.Meter.Meter;
 
 import java.util.ArrayList;
@@ -66,6 +68,49 @@ public class meterHandler {
             allOutput += meter.generateOutput();
         }
         return allOutput;
+    }
+
+    public static String dataValidation(){
+        String allErrors = "";
+        for (Meter meter: allMeters){
+            if (meter.getNumber() == 0){
+                allErrors += meter + "missing number" + "\n";
+            }
+
+            if (meter.getIsActive() == 0){
+                allErrors += meter + "Got data from deactive meter" + "\n";
+            }
+
+            if (meter.getChannels() == null){
+                allErrors += meter + "missing channels" + "\n";
+            }
+
+            for (Channel channel: meter.getChannels()){
+                if (channel.getMeasureType() == ""){
+                    allErrors += meter + " " + channel + "missing channel measure type" + "\n";
+                }
+
+                if (channel.getTotal() == 0){
+                    allErrors += meter + " " + channel + "missing total" + "\n";
+                }
+
+                for (Datausage datausage: channel.getComsumptionData()){
+                    if (datausage.getUserData() == 0){
+                        allErrors += meter + " " + channel + " " + datausage + "missing Data value" + "\n";
+                    }
+
+                    if (datausage.getDate() == null){
+                        allErrors += meter + " " + channel + " " + datausage + "missing date" + "\n";
+                    }
+
+                    if (datausage.getUnitType() == ""){
+                        allErrors += meter + " " + channel + " " + datausage + "missing unit type" + "\n";
+                    }
+                }
+            }
+        }
+
+        return allErrors;
     }
 }
 
