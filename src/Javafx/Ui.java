@@ -36,6 +36,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Ui extends Application {
+    Scene startscene, meterscene,validationscene;
 
 
 
@@ -59,11 +60,34 @@ public class Ui extends Application {
             grid.setHgap(10);
             grid.setVgap(10);
 
+            Label startscenelbl = new Label("WELCOME ADMINISTRATOR");
+            Button meteranddatabtn = new Button("Meters & Data");
+            meteranddatabtn.setOnAction(event -> primaryStage.setScene(meterscene));
+            VBox allmeterslayout = new VBox(20);
+            allmeterslayout.getChildren().addAll(startscenelbl,meteranddatabtn);
+            startscene =new Scene(allmeterslayout,500,500);
 
-            Text scenetitle=new Text("WELCOME ADMINISTRATOR");
-            scenetitle.setId("energistyring");
-            grid.add(scenetitle,0,0,2,1);
-            grid.setAlignment(Pos.TOP_CENTER);
+
+            Label meterscenelbl = new Label("METERS & DATA");
+            Button return1 = new Button("Return");
+            return1.setOnAction(event -> primaryStage.setScene(startscene));
+            Button meterbtn = new Button("Create");
+            meterbtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Alert meteralert = new Alert(Alert.AlertType.ERROR);
+                    meteralert.setHeaderText("hello");
+                    meteralert.setContentText("hello hello");
+                    meteralert.showAndWait();
+                }
+            });
+            VBox meterscenelayout =new VBox(20);
+            meterscenelayout.getChildren().addAll(meterscenelbl,meterbtn,return1);
+            meterscene=new Scene(meterscenelayout,500,500);
+
+
+
+
 
 //buttons and labels for meters and data scene:
 
@@ -315,19 +339,10 @@ public class Ui extends Application {
 
 
 
-            //Primarystage setup:
-            Scene scene=new Scene (grid);
-            primaryStage.setScene(scene);
-            primaryStage.setMinWidth(750);
-            primaryStage.setMinHeight(800);
-            primaryStage.setResizable(true);
 
 
 
-
-
-
-
+            primaryStage.setScene(startscene);
             primaryStage.show();
 
 
