@@ -53,8 +53,7 @@ public class Meter {
         this.location = location;
     }
 
-    public void addChannel(String measureType){
-        Channel channel = new Channel(measureType);
+    public void addChannel(Channel channel){
         channels.add(channel);
 
     }
@@ -86,5 +85,15 @@ public class Meter {
 
         }
         return allOutput;
+    }
+
+    @Override
+    public String toString() {
+        return "Meter{" +
+                "channels=" + channels +
+                ", number=" + number +
+                ", isActive=" + isActive +
+                ", location=" + location +
+                '}';
     }
 }

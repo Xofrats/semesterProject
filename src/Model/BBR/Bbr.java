@@ -9,7 +9,7 @@ public class Bbr {
     private String propertyType;
 
 //Constructor
-    public Bbr(int propertyNumber, String adress, int houseNumber, int zipCode, double heatedSquareMeters, String propertyType) {
+    public Bbr(int propertyNumber, String adress, int houseNumber, int zipCode, int heatedSquareMeters, String propertyType) {
         this.propertyNumber = propertyNumber;
         this.address = adress;
         this.houseNumber = houseNumber;

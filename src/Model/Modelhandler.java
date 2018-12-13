@@ -1,5 +1,6 @@
 package Model;
 
+import Handlers.DataGenerator;
 import Model.BBR.Bbr;
 import Handlers.BbrHandler;
 import Model.Meter.Meter;
@@ -16,39 +17,15 @@ public class Modelhandler {
 
     public static void main(String args[]) {
 
-        System.out.println("abe");
-        Bbr test = BbrHandler.createBbrManuelt(9876, "gade", 55, 9999, 100, "house");
-        Meter meter = new Meter( 1234, 1, test);
-        LocalDate today = LocalDate.now();
-        Channel channelTest = new Channel("heat");
-        Channel channelTest2 = new Channel("water");
-        ArrayList<Channel> channelList = new ArrayList();
-        channelList.add(channelTest);
-        channelList.add(channelTest2);
-        meter.setChannels(channelList);
-        for (int i = 0; i < 100; i++) {
-            Random random = new Random();
-            int n = random.nextInt(100) + 1;
-            channelTest.addNewDatausage(n, today, "joule");
+        DataGenerator.createBbrs(10);
 
-        }
+        Meter meter = new Meter(1111, 1, BbrHandler.getAllBbr().get(3));
+        meter.addChannel(DataGenerator.randomChannel("heat", 30, "joule"));
 
-        for (int i = 0; i < 100; i++) {
-            Random random = new Random();
-            int n = random.nextInt(100) + 1;
-            channelTest2.addNewDatausage(n, today, "flow");
+        System.out.println(BbrHandler.getAllBbr());
+        System.out.println(meter.getLocation());
 
-        }
 
-boolean checkBBR;
-        boolean checkFalse;
-        checkBBR = BbrHandler.isValidAdress(meter.getLocation().getPropertyNumber());
-        checkFalse = BbrHandler.isValidAdress(5555);
-
-        System.out.println(checkBBR);
-        System.out.println(checkFalse);
-       // String output = meter.generateOutput();
-       // System.out.println(output);
       //  createCsvFile("c:/test/test3", output);
 
 

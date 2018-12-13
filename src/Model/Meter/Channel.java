@@ -41,5 +41,13 @@ public class Channel {
     comsumptionData.add(new Datausage(userData, date, unitType));
     }
 
+    @Override
+    public String toString() {
+        return "Channel{" +
+                "measureType='" + measureType + '\'' +
+                ", comsumptionData=" + comsumptionData +
+                ", total=" + total +
+                '}';
     }
+}
 
