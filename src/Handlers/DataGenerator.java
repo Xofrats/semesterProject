@@ -3,6 +3,7 @@ package Handlers;
 import Model.BBR.Bbr;
 import Model.Meter.Channel;
 import Model.Meter.Datausage;
+import Model.Meter.Meter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,6 +40,15 @@ public static Channel randomChannel(String measureType,  int length, String unit
         createdChannel.setComsumptionData(randomDatauage(length, unitType));
         return createdChannel;
 }
+
+// Random meter
+    public static Meter randomMeter(){
+        Random random = new Random();
+        Meter createdMeter = meterHandler.createMeterAuto(random.nextInt(9000) + 1, 1, BbrHandler.getAllBbr().get(random.nextInt(BbrHandler.getAllBbr().size())));
+        return createdMeter;
+    }
+
+
 
 //Random BBR
     public static void createBbrs(int total){

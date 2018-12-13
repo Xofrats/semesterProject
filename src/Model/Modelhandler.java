@@ -1,6 +1,7 @@
 package Model;
 
 import Handlers.DataGenerator;
+import Handlers.meterHandler;
 import Model.BBR.Bbr;
 import Handlers.BbrHandler;
 import Model.Meter.Meter;
@@ -19,14 +20,19 @@ public class Modelhandler {
 
         DataGenerator.createBbrs(10);
 
-        Meter meter = new Meter(1111, 1, BbrHandler.getAllBbr().get(3));
-        meter.addChannel(DataGenerator.randomChannel("heat", 30, "joule"));
+        Meter meter = meterHandler.createMeterAuto(1111, 1, BbrHandler.getAllBbr().get(5));
+        Meter meter2 = meterHandler.createMeterAuto(2222, 1, BbrHandler.getAllBbr().get(7));
+        meter.addChannel(DataGenerator.randomChannel("heat", 1, "joule"));
+        meter.addChannel(DataGenerator.randomChannel("water", 1, "flow"));
+        meter2.addChannel(DataGenerator.randomChannel("heat", 1, "joule"));
 
-        System.out.println(BbrHandler.getAllBbr());
-        System.out.println(meter.getLocation());
+        Meter meter3 = DataGenerator.randomMeter();
+        meter3.addChannel(DataGenerator.randomChannel("water", 1, "temperature"));
 
+        System.out.println(meterHandler.getAllMeters());
 
-      //  createCsvFile("c:/test/test3", output);
+        String output = meterHandler.allMetersOutput();
+       // createCsvFile("c:/test/test3", output);
 
 
 

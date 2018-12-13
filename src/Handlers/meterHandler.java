@@ -9,13 +9,13 @@ public class meterHandler {
 
     private static ArrayList<Meter> allMeters = new ArrayList<>();
 
-    public static Meter createMeterAuto(String measureType, int number, int isActive, Bbr BBR) {
+    public static Meter createMeterAuto(int number, int isActive, Bbr BBR) {
         Meter createdMeter = new Meter(number, isActive, BBR);
         allMeters.add(createdMeter);
         return createdMeter;
     }
 
-    public static Meter createMeterManuelt(String measureType, int number, int isActive, int propertyNumber, String address, int houseNumber, int zipCode, int heatedSquareMeter, String propertyType) {
+    public static Meter createMeterManuelt(int number, int isActive, int propertyNumber, String address, int houseNumber, int zipCode, int heatedSquareMeter, String propertyType) {
         Meter createdMeter = new Meter(number, isActive, BbrHandler.createBbrManuelt(propertyNumber, address, houseNumber, zipCode, heatedSquareMeter, propertyType));
         allMeters.add(createdMeter);
         return createdMeter;
@@ -56,6 +56,16 @@ public class meterHandler {
                }
             }
         }
+    }
+
+    //Generated output for all meters
+
+    public static String allMetersOutput(){
+        String allOutput = "";
+        for (Meter meter: allMeters){
+            allOutput += meter.generateOutput();
+        }
+        return allOutput;
     }
 }
 
