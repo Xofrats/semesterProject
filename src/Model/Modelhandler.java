@@ -1,5 +1,7 @@
 package Model;
 
+import Handlers.DataGenerator;
+import Handlers.meterHandler;
 import Model.BBR.Bbr;
 import Handlers.BbrHandler;
 import Model.Meter.Meter;
@@ -16,44 +18,27 @@ public class Modelhandler {
 
     public static void main(String args[]) {
 
-        System.out.println("abe");
-        Bbr test = BbrHandler.createBbrManuelt(9876, "gade", 55, 9999, 100, "house");
-        Meter meter = new Meter( 1234, 1, test);
-        LocalDate today = LocalDate.now();
-        Channel channelTest = new Channel("heat");
-        Channel channelTest2 = new Channel("water");
-        ArrayList<Channel> channelList = new ArrayList();
-        channelList.add(channelTest);
-        channelList.add(channelTest2);
-        meter.setChannels(channelList);
-        for (int i = 0; i < 100; i++) {
-            Random random = new Random();
-            int n = random.nextInt(100) + 1;
-            channelTest.addNewDatausage(n, today, "joule");
+        DataGenerator.createBbrs(10);
 
-        }
+        Meter meter = meterHandler.createMeterAuto(1111, 1, BbrHandler.getAllBbr().get(5));
+        Meter meter2 = meterHandler.createMeterAuto(2222, 1, BbrHandler.getAllBbr().get(7));
+        meter.addChannel(DataGenerator.randomChannel("", 1, "joule"));
+        meter.addChannel(DataGenerator.randomChannel("water", 1, "flow"));
+        meter2.addChannel(DataGenerator.randomChannel("heat", 1, ""));
 
-        for (int i = 0; i < 100; i++) {
-            Random random = new Random();
-            int n = random.nextInt(100) + 1;
-            channelTest2.addNewDatausage(n, today, "flow");
+        Meter meter3 = DataGenerator.randomMeter();
+        meter3.addChannel(DataGenerator.randomChannel("water", 1, "temperature"));
 
-        }
+        System.out.println(meterHandler.dataValidation());
 
-boolean checkBBR;
-        boolean checkFalse;
-        checkBBR = BbrHandler.isValidAdress(meter.getLocation().getPropertyNumber());
-        checkFalse = BbrHandler.isValidAdress(5555);
-
-        System.out.println(checkBBR);
-        System.out.println(checkFalse);
-       // String output = meter.generateOutput();
-       // System.out.println(output);
-      //  createCsvFile("c:/test/test3", output);
+        String output = meterHandler.allMetersOutput();
+       // createCsvFile("c:/test/test3", output);
 
 
 
     }
+
+
 
     public static void createCsvFile(String fileName, String str) {
 

@@ -38,5 +38,14 @@ public class Datausage {
     public void setUnitType(String unitType) {
         this.unitType = unitType;
     }
+
+    @Override
+    public String toString() {
+        return "Datausage{" +
+                "userData=" + userData +
+                ", date=" + date +
+                ", unitType='" + unitType + '\'' +
+                '}';
+    }
 }
 
