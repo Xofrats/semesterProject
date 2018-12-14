@@ -111,10 +111,16 @@ public class Ui extends Application {
                 @Override
                 public void handle(ActionEvent event) {
 
+                    Alert showdataalert = new Alert(Alert.AlertType.INFORMATION);
+                    showdataalert.setHeaderText(null);
+                    showdataalert.setContentText("Showing data for meter nr "+meterdatatext.getText()+":");
+
+                    showdataalert.showAndWait();
+
                 }
             });
 
-            // showing all meters in an array table:
+// showing all meters in an array table:
 
             Label allmeterslbl = new Label("Show all meters");
             grid.add(allmeterslbl,3,10);
@@ -124,6 +130,12 @@ public class Ui extends Application {
             allmetersbtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+
+                    Alert showallmetersalert = new Alert(Alert.AlertType.INFORMATION);
+                    showallmetersalert.setHeaderText(null);
+                    showallmetersalert.setContentText("Showing all meters");
+
+                    showallmetersalert.showAndWait();
 
                 }
             });
