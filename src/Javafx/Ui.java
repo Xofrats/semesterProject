@@ -63,34 +63,17 @@ public class Ui extends Application {
             Label startscenelbl = new Label("WELCOME ADMINISTRATOR");
             Button meteranddatabtn = new Button("Meters & Data");
             meteranddatabtn.setOnAction(event -> primaryStage.setScene(meterscene));
+            Button validatebtn = new Button("Validation");
+            validatebtn.setOnAction(event -> primaryStage.setScene(validationscene));
             VBox allmeterslayout = new VBox(20);
-            allmeterslayout.getChildren().addAll(startscenelbl,meteranddatabtn);
+            allmeterslayout.getChildren().addAll(startscenelbl,meteranddatabtn,validatebtn);
             startscene =new Scene(allmeterslayout,500,500);
 
 
             Label meterscenelbl = new Label("METERS & DATA");
-            Button return1 = new Button("Return");
+            Button return1 = new Button("Return to start");
             return1.setOnAction(event -> primaryStage.setScene(startscene));
-            Button meterbtn = new Button("Create");
-            meterbtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    Alert meteralert = new Alert(Alert.AlertType.ERROR);
-                    meteralert.setHeaderText("hello");
-                    meteralert.setContentText("hello hello");
-                    meteralert.showAndWait();
-                }
-            });
-            VBox meterscenelayout =new VBox(20);
-            meterscenelayout.getChildren().addAll(meterscenelbl,meterbtn,return1);
-            meterscene=new Scene(meterscenelayout,500,500);
-
-
-
-
-
-//buttons and labels for meters and data scene:
-
+            //buttons and labels for meters and data scene:
             // create meter button:
             Label addmeter=new Label("To create a new meter, fill out the form below");
             grid.add(addmeter,0,4);
@@ -100,7 +83,6 @@ public class Ui extends Application {
             grid.add(propertynumber,0,6);
 
             Button createmeter =  new Button("Create Meter");
-            HBox hcreatemeter = new HBox(20);
             grid.add(createmeter,0,7);
 
 
@@ -238,41 +220,13 @@ public class Ui extends Application {
                 }
             });
 
+            VBox meterscenelayout =new VBox(20);
+            meterscenelayout.getChildren().addAll(meterscenelbl,return1,addmeter,bbrpropertynumber,propertynumber,createmeter,editmeterlbl,editmeterbtn,closeactivatemeter,closeactivatemeter2,entermeternumber,closeactivatemeterbutton,meterdatalbl,meterdatatext,meterdatabtn,allmeterslbl,allmetersbtn);
+            meterscene=new Scene(meterscenelayout,650,800);
 
-//window1 buttons:
-
-            //Button 1, opens window 2 for meters and data:
-            Label allmeterdatalbl =new Label("Watch all meters and data:");
-            grid.add(allmeterdatalbl,1,10);
-            Button almetersbtn =new Button("All Meters");
-            grid.add(almetersbtn,1,11);
-
-            almetersbtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-
-                    //open window 2 here for meters and data!
-                    Alert allmetersalert = new Alert(Alert.AlertType.INFORMATION);
-                    allmetersalert.setHeaderText(null);
-                    allmetersalert.setContentText("showing all meters"); //insert code for showing all meters
-
-                    allmetersalert.showAndWait();
-                }
-            });
-
-            //Button 2 opens window 3 for validation:
-            Label validationlbl = new Label("Validate data and meters");
-            grid.add(validationlbl,2,10);
-            Button validationbtn =new Button("Validate");
-            grid.add(validationbtn,2,11);
-
-            validationbtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-
-                }
-            });
-
+            Label validationscenelbl = new Label("VALIDATION");
+            Button return2 = new Button("Return to start");
+            return2.setOnAction(event -> primaryStage.setScene(startscene));
 // validation buttons inside window 3:
 
             //check if meter activated or closed with the meters number:
@@ -325,6 +279,22 @@ public class Ui extends Application {
 
                 }
             });
+            VBox validationscenelayout = new VBox(20);
+            validationscenelayout.getChildren().addAll(validationscenelbl, return2,activeclosedvallbl,activeclosedvaltext,activeclosedvalbtn,checkvalueslbl,checkvaluesbtn);
+            validationscene = new Scene(validationscenelayout,500,500);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
