@@ -60,7 +60,15 @@ public class Modelhandler {
       return allErrors;
     }
 
-    //public static Meter getMeter
+    public static Meter getMeter(int meterNumber){
+        Meter gottenMeter = meterHandler.getMeter(meterNumber);
+        return gottenMeter;
+    }
+
+    public static ArrayList<Meter> getAllMeters(){
+        ArrayList<Meter> allMeters =  meterHandler.getAllMeters();
+        return allMeters;
+    }
 
 
 

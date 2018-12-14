@@ -388,7 +388,7 @@ public class Ui extends Application {
             primaryStage.setScene(startscene);
             primaryStage.show();
 
-
+//the end
 
         }
 }
