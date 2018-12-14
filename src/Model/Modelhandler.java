@@ -16,28 +16,6 @@ import java.util.Random;
 
 public class Modelhandler {
 
-    public static void main(String args[]) {
-
-        DataGenerator.createBbrs(10);
-
-        Meter meter = meterHandler.createMeterAuto(1111, 1, BbrHandler.getAllBbr().get(5));
-        Meter meter2 = meterHandler.createMeterAuto(2222, 1, BbrHandler.getAllBbr().get(7));
-        meter.addChannel(DataGenerator.randomChannel("", 1, "joule"));
-        meter.addChannel(DataGenerator.randomChannel("water", 1, "flow"));
-        meter2.addChannel(DataGenerator.randomChannel("heat", 1, ""));
-
-        Meter meter3 = DataGenerator.randomMeter();
-        meter3.addChannel(DataGenerator.randomChannel("water", 1, "temperature"));
-
-        System.out.println(meterHandler.dataValidation());
-
-        String output = meterHandler.allMetersOutput();
-       // createCsvFile("c:/test/test3", output);
-
-
-
-    }
-
     public static void createMeter(int meterNumber, int active, Bbr bbr){
         meterHandler.createMeterAuto(meterNumber, active, bbr);
     }
@@ -49,6 +27,17 @@ public class Modelhandler {
 
     public static void toggleActive(int meterNumber){
         meterHandler.toggleActive(meterNumber);
+    }
+
+    public static int isActive(int meterNumber){
+        ArrayList<Meter> allMeter = meterHandler.getAllMeters();
+        for (Meter meter: allMeter){
+            if(meterNumber == meter.getNumber()){
+                return meter.getIsActive();
+            }
+        }
+
+        return 3;
     }
 
     public static void addBbrToMeter(int meterNumber, Bbr bbr){

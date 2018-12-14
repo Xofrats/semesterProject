@@ -1,6 +1,7 @@
 package Javafx;
 
 import Model.Meter.Meter;
+import Model.Modelhandler;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -47,7 +48,7 @@ public class Ui extends Application {
 
 
 
-        public static void notmain (String args[]){
+        public static void UI (String args[]){
 
 //Beginning of javafx:
             launch(args);
@@ -88,6 +89,8 @@ public class Ui extends Application {
 
             createmeter.setOnAction(event -> primaryStage.setScene(createmeterscene));
 
+
+
 //edit meter button:
 
             Label editmeterlbl = new Label("To dit meter, push the button and fill out the form");
@@ -113,7 +116,9 @@ public class Ui extends Application {
 
                     Alert showdataalert = new Alert(Alert.AlertType.INFORMATION);
                     showdataalert.setHeaderText(null);
-                    showdataalert.setContentText("Showing data for meter nr "+meterdatatext.getText()+":");
+                    int meterNumber = Integer.parseInt(meterdatatext.getText());
+                    Meter meter = Modelhandler.getMeter(meterNumber);
+                    showdataalert.setContentText("Showing data for meter nr" + meter.getNumber() + " /n" + meter);
 
                     showdataalert.showAndWait();
 
@@ -133,7 +138,9 @@ public class Ui extends Application {
 
                     Alert showallmetersalert = new Alert(Alert.AlertType.INFORMATION);
                     showallmetersalert.setHeaderText(null);
-                    showallmetersalert.setContentText("Showing all meters");
+
+                    ArrayList<Meter> allMeters = Modelhandler.getAllMeters();
+                    showallmetersalert.setContentText("Showing data for meter nr" + allMeters + " /n");
 
                     showallmetersalert.showAndWait();
 
@@ -164,40 +171,41 @@ public class Ui extends Application {
             close.setUserData("Close");
 
 
-            final ToggleGroup group = new ToggleGroup();
-            group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-                @Override
-                public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                    if (group.getSelectedToggle() != null){
-                        String radioSelected = group.getSelectedToggle().getUserData().toString();
 
-                        if (radioSelected == "Activate"){
-                            System.out.println("it worked");
-                            //Modelhandler.createMeter(Integer.parseInt(createmeternumber.getText()), 1, Modelhandler.getBbr(Integer.parseInt(createBbr.getText())));
-                        }
-
-                        if (radioSelected == "Close"){
-                            //Modelhandler.createMeter(Integer.parseInt(createmeternumber.getText()), 0, Modelhandler.getBbr(Integer.parseInt(createBbr.getText())));
-                        }
-
-
-
-                    }
-                }
-            });
-            close.setToggleGroup(group);
-            activate.setToggleGroup(group);
 
             Button submitmeterbtn = new Button("Submit");
+
             Button cancelmeterbtn = new Button("Cancel and return to start");
             cancelmeterbtn.setOnAction(event -> primaryStage.setScene(meterscene));
+
+            submitmeterbtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+
+                   String radioText = "";
+
+                   if (activate.isSelected()){
+                        radioText = entermeternrtxt.getText();
+                        Modelhandler.createMeter(Integer.parseInt(radioText), 1, Modelhandler.getBbr(Integer.parseInt(enterBBrtxt.getText())));
+                        System.out.println("it worked new");
+                    }
+
+                    if (close.isSelected()){
+                        radioText = entermeternrtxt.getText();
+                        Modelhandler.createMeter(Integer.parseInt(radioText), 0, Modelhandler.getBbr(Integer.parseInt(enterBBrtxt.getText())));
+                        System.out.println("it worked new");
+                    }
+
+                    primaryStage.setScene(meterscene);
+                }
+            });
 
             VBox createmeterscenelayout = new VBox(20);
             createmeterscenelayout.getChildren().addAll(entermeternrlbl,entermeternrtxt,enterBBRlbl,enterBBrtxt,activate,close,submitmeterbtn,cancelmeterbtn);
             createmeterscene =new Scene(createmeterscenelayout,500,500);
 
 
-
+//start of validation scene
 
 
             Label validationscenelbl = new Label("VALIDATION");
@@ -217,27 +225,19 @@ public class Ui extends Application {
             activeclosedvalbtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    Alert isactivealert = new Alert(Alert.AlertType.INFORMATION);
+                    isactivealert.setHeaderText(null);
+
                     int activeclosedvaltext1 = Integer.parseInt(activeclosedvaltext.getText());
+                    int isActive = Modelhandler.isActive(activeclosedvaltext1);
 
-//how to make an if else statement here?
+                    isactivealert.setContentText("The meter is " + isActive);
 
-                    if (activeclosedvaltext.equals(activeclosedvaltext1)){
+                    isactivealert.showAndWait();
 
-                        Alert activeclosedvalalert =new Alert(Alert.AlertType.INFORMATION);
-                        activeclosedvalalert.setHeaderText(null);
-                        activeclosedvalalert.setContentText("The meter is "); //insert code for active or closed meters
 
-                        activeclosedvalalert.showAndWait();
 
-                    }
-                    else {
-                        Alert error2 = new Alert(Alert.AlertType.ERROR);
-                        error2.setTitle("Error");
-                        error2.setHeaderText(null);
-                        error2.setContentText("Please only enter numbers, thank you!");
 
-                        error2.showAndWait();
-                    }
 
 
                 }
@@ -253,7 +253,14 @@ public class Ui extends Application {
             checkvaluesbtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    Alert showErrorsAlert = new Alert(Alert.AlertType.INFORMATION);
+                    showErrorsAlert.setHeaderText(null);
 
+                    String allErrors = Modelhandler.validateData();
+
+                    showErrorsAlert.setContentText(allErrors);
+
+                    showErrorsAlert.showAndWait();
                 }
             });
             VBox validationscenelayout = new VBox(20);
@@ -270,37 +277,52 @@ public class Ui extends Application {
             TextField enterBBrtxt1 = new TextField("Propertynumber");
 
             RadioButton activate1 = new RadioButton("Activate");
-            activate.setSelected(true);
             activate.setUserData("Activate");
             RadioButton close1 = new RadioButton("Close");
             close.setUserData("Close");
 
 
             final ToggleGroup group1 = new ToggleGroup();
-            group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-                @Override
-                public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                    if (group1.getSelectedToggle() != null){
-                        String radioSelected = group1.getSelectedToggle().getUserData().toString();
-
-                        if (radioSelected == "Activate"){
-                            System.out.println("it worked");
-                            //Modelhandler.createMeter(Integer.parseInt(createmeternumber.getText()), 1, Modelhandler.getBbr(Integer.parseInt(createBbr.getText())));
-                        }
-
-                        if (radioSelected == "Close"){
-                            //Modelhandler.createMeter(Integer.parseInt(createmeternumber.getText()), 0, Modelhandler.getBbr(Integer.parseInt(createBbr.getText())));
-                        }
 
 
 
-                    }
-                }
-            });
-            close.setToggleGroup(group);
-            activate.setToggleGroup(group);
+        
+            close.setToggleGroup(group1);
+            activate.setToggleGroup(group1);
 
             Button submitmeterbtn1 = new Button("Submit");
+
+            submitmeterbtn1.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+
+                    String radioText = " ";
+
+                    if (activate.isSelected()){
+                        radioText = entermeternrtxt1.getText();
+                        int meterNumber = Integer.parseInt(radioText);
+                        Modelhandler.toggleActive(meterNumber);
+                    }
+
+                    if (close.isSelected()){
+                        radioText = entermeternrtxt1.getText();
+                        int meterNumber = Integer.parseInt(radioText);
+                        Modelhandler.toggleActive(meterNumber);
+
+                    }
+
+                  if (enterBBrtxt1.getText() != null){
+                        radioText = entermeternrtxt1.getText();
+                        int meterNumber = Integer.parseInt(radioText);
+                        int enteredBbr = Integer.parseInt(enterBBrtxt1.getText());
+                        Modelhandler.addBbrToMeter(meterNumber, Modelhandler.getBbr(enteredBbr));
+
+                    }
+
+                    primaryStage.setScene(meterscene);
+                }
+            });
+
             Button cancelmeterbtn1 = new Button("Cancel and return to start");
             cancelmeterbtn1.setOnAction(event -> primaryStage.setScene(meterscene));
 
