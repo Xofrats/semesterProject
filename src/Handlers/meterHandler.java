@@ -74,37 +74,37 @@ public class meterHandler {
         String allErrors = "";
         for (Meter meter: allMeters){
             if (meter.getNumber() == 0){
-                allErrors += meter + "missing number" + "\n";
+                allErrors += meter.getNumber() + "missing number" + "\n";
             }
 
             if (meter.getIsActive() == 0){
-                allErrors += meter + "Got data from deactive meter" + "\n";
+                allErrors += meter.getNumber() + "Got data from deactivate meter" + "\n";
             }
 
             if (meter.getChannels() == null){
-                allErrors += meter + "missing channels" + "\n";
+                allErrors += meter.getNumber() + "missing channels" + "\n";
             }
 
             for (Channel channel: meter.getChannels()){
                 if (channel.getMeasureType() == ""){
-                    allErrors += meter + " " + channel + "missing channel measure type" + "\n";
+                    allErrors += meter.getNumber() + " " + channel.getMeasureType() + "missing channel measure type" + "\n";
                 }
 
                 if (channel.getTotal() == 0){
-                    allErrors += meter + " " + channel + "missing total" + "\n";
+                    allErrors += meter.getNumber() + " " + channel.getMeasureType() + "missing total" + "\n";
                 }
 
                 for (Datausage datausage: channel.getComsumptionData()){
                     if (datausage.getUserData() == 0){
-                        allErrors += meter + " " + channel + " " + datausage + "missing Data value" + "\n";
+                        allErrors += meter.getNumber() + " " + channel.getMeasureType() + " " + datausage.getUnitType() + "missing Data value" + "\n";
                     }
 
                     if (datausage.getDate() == null){
-                        allErrors += meter + " " + channel + " " + datausage + "missing date" + "\n";
+                        allErrors += meter.getNumber() + " " + channel.getMeasureType() + " " + datausage.getUnitType() + "missing date" + "\n";
                     }
 
                     if (datausage.getUnitType() == ""){
-                        allErrors += meter + " " + channel + " " + datausage + "missing unit type" + "\n";
+                        allErrors += meter.getNumber() + " " + channel.getMeasureType() + " " + datausage.getUnitType() + "missing unit type" + "\n";
                     }
                 }
             }

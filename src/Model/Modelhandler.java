@@ -38,6 +38,15 @@ public class Modelhandler {
 
     }
 
+    public static void createMeter(int meterNumber, int active, Bbr bbr){
+        meterHandler.createMeterAuto(meterNumber, active, bbr);
+    }
+
+    public static Bbr getBbr(int propertyNumber){
+       Bbr gottenBbr = BbrHandler.getBbr(propertyNumber);
+       return gottenBbr;
+    }
+
 
 
     public static void createCsvFile(String fileName, String str) {

@@ -29,4 +29,14 @@ public class BbrHandler {
             }
             return isValid;
     }
+
+    public static Bbr getBbr(int propertyNumber){
+            for (Bbr brr: allBbr){
+                if (propertyNumber == brr.getPropertyNumber()){
+                    return brr;
+                }
+            }
+            Bbr bbr = new Bbr(0000, "None", 00, 0000, 00, "none");
+            return bbr;
+    }
 }

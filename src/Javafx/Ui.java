@@ -2,6 +2,8 @@ package Javafx;
 
 import Model.Meter.Meter;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -35,7 +37,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 
+import Model.Modelhandler;
+
 public class Ui extends Application {
+    public static ButtonType submitchanges = null;
     Scene startscene, meterscene,validationscene;
 
 
@@ -45,7 +50,7 @@ public class Ui extends Application {
 
 
 
-        public static void notmain (String args[]){
+        public static void main (String args[]){
 
 //Beginning of javafx:
             launch(args);
@@ -86,18 +91,86 @@ public class Ui extends Application {
             grid.add(createmeter,0,7);
 
 
+
+
+
+
             createmeter.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
 
-                    Alert metercreated=new Alert(Alert.AlertType.INFORMATION);
-                    metercreated.setHeaderText(null);
-                    metercreated.setContentText("Meter was created");
+                    Dialog<Pair<String,String>> createMeterDialog = new Dialog<>();
+                    createMeterDialog.setTitle("Create meter");
+                    submitchanges = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
+                    createMeterDialog.getDialogPane().getButtonTypes().addAll(submitchanges,ButtonType.CANCEL);
 
-                    metercreated.showAndWait();
+                    GridPane createMetergridpane = new GridPane();
+                    createMetergridpane.setHgap(10);
+                    createMetergridpane.setVgap(10);
+                    createMetergridpane.setPadding(new Insets(20,150,20,20));
+
+                    TextField createmeternumber =new TextField();
+                    createmeternumber.setPromptText("Meter number");
+                    TextField createBbr = new TextField();
+                    createBbr.setPromptText("Propertynumber");
+
+                    createMetergridpane.add(new Label("Enter meter number:"),0,0);
+                    createMetergridpane.add(createmeternumber,1,0);
+                    createMetergridpane.add(new Label("Enter BBR propertynumber:"),0,1);
+                    createMetergridpane.add(createBbr,1,1);
+
+
+                    //need to make the radiobuttons work somehow
+
+                    RadioButton activate = new RadioButton("Activate");
+                    activate.setSelected(true);
+                    activate.setUserData("Activate");
+                    RadioButton close = new RadioButton("Close");
+                    close.setUserData("Close");
+
+
+                    final ToggleGroup group = new ToggleGroup();
+                    group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+                        @Override
+                        public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                            if (group.getSelectedToggle() != null){
+                                String radioSelected = group.getSelectedToggle().getUserData().toString();
+
+                                if (radioSelected == "Activate"){
+                                    System.out.println("it worked");
+                                    //Modelhandler.createMeter(Integer.parseInt(createmeternumber.getText()), 1, Modelhandler.getBbr(Integer.parseInt(createBbr.getText())));
+                                }
+
+                                if (radioSelected == "Close"){
+                                    //Modelhandler.createMeter(Integer.parseInt(createmeternumber.getText()), 0, Modelhandler.getBbr(Integer.parseInt(createBbr.getText())));
+                                }
+
+
+
+                            }
+                        }
+                    });
+                    close.setToggleGroup(group);
+                    activate.setToggleGroup(group);
+                    createMetergridpane.add(activate,0,2);
+                    createMetergridpane.add(close,1,2);
+
+                    createMeterDialog.getDialogPane().setContent(createMetergridpane);
+
+                    Optional<Pair<String,String>> result = createMeterDialog.showAndWait();
+
+
+
+
+
+
+
 
 
                 }
+
+
+
             });
 
 //edit meter button:
