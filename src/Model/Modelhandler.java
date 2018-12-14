@@ -47,6 +47,21 @@ public class Modelhandler {
        return gottenBbr;
     }
 
+    public static void toggleActive(int meterNumber){
+        meterHandler.toggleActive(meterNumber);
+    }
+
+    public static void addBbrToMeter(int meterNumber, Bbr bbr){
+        meterHandler.addBbrToMeter(meterNumber, bbr);
+    }
+
+    public static String validateData(){
+      String allErrors = meterHandler.dataValidation();
+      return allErrors;
+    }
+
+    //public static Meter getMeter
+
 
 
     public static void createCsvFile(String fileName, String str) {
