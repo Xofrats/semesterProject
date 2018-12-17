@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class BbrHandler {
     private static ArrayList<Bbr> allBbr = new ArrayList<>();
 
-        public static Bbr createBbrManuelt(int propertyNumber, String adress, int houseNumber, int zipCode, int heatedSquareMeters, String propertyType){
-        Bbr createBbr = new Bbr(propertyNumber, adress, houseNumber,zipCode,heatedSquareMeters,propertyType);
+        public static Bbr createBbrManuelt(int propertyNumber, String address, int houseNumber, int zipCode, int heatedSquareMeters, String propertyType){
+        Bbr createBbr = new Bbr(propertyNumber, address, houseNumber,zipCode,heatedSquareMeters,propertyType);
         allBbr.add(createBbr);
         return createBbr;
 
@@ -19,7 +19,7 @@ public class BbrHandler {
             return allBbr;
     }
 
-    public static boolean isValidAdress(int propertyNumber){
+    public static boolean isValidAddress(int propertyNumber){
             boolean isValid = false;
             for (Bbr bbr: allBbr){
                 if (propertyNumber == bbr.getPropertyNumber()){

@@ -5,13 +5,13 @@ public class Bbr {
     private String address;
     private int houseNumber;
     private int zipCode;
-    private double heatedSquareMeters;
+    private int heatedSquareMeters;
     private String propertyType;
 
 //Constructor
-    public Bbr(int propertyNumber, String adress, int houseNumber, int zipCode, int heatedSquareMeters, String propertyType) {
+    public Bbr(int propertyNumber, String address, int houseNumber, int zipCode, int heatedSquareMeters, String propertyType) {
         this.propertyNumber = propertyNumber;
-        this.address = adress;
+        this.address = address;
         this.houseNumber = houseNumber;
         this.zipCode = zipCode;
         this.heatedSquareMeters = heatedSquareMeters;
@@ -30,8 +30,8 @@ public class Bbr {
         return address;
     }
 
-    public void setAdress(String adress) {
-        this.address = adress;
+    public void setAdress(String address) {
+        this.address = address;
     }
 
     public int getHouseNumber() {
@@ -50,11 +50,11 @@ public class Bbr {
         this.zipCode = zipCode;
     }
 
-    public double getHeatedSquareMeters() {
+    public int getHeatedSquareMeters() {
         return heatedSquareMeters;
     }
 
-    public void setHeatedSquareMeters(double heatedSquareMeters) {
+    public void setHeatedSquareMeters(int heatedSquareMeters) {
         this.heatedSquareMeters = heatedSquareMeters;
     }
 

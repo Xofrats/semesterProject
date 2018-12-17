@@ -7,7 +7,7 @@ import Model.Meter.Meter;
 
 import java.util.ArrayList;
 
-public class meterHandler {
+public class MeterHandler {
 
     private static ArrayList<Meter> allMeters = new ArrayList<>();
 
@@ -17,11 +17,11 @@ public class meterHandler {
         return createdMeter;
     }
 
-    public static Meter createMeterManuelt(int number, int isActive, int propertyNumber, String address, int houseNumber, int zipCode, int heatedSquareMeter, String propertyType) {
+/*    public static Meter createMeterManuelt(int number, int isActive, int propertyNumber, String address, int houseNumber, int zipCode, int heatedSquareMeter, String propertyType) {
         Meter createdMeter = new Meter(number, isActive, BbrHandler.createBbrManuelt(propertyNumber, address, houseNumber, zipCode, heatedSquareMeter, propertyType));
         allMeters.add(createdMeter);
         return createdMeter;
-    }
+    }*/
 
     public static ArrayList<Meter> getAllMeters() {
         return allMeters;

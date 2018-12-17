@@ -37,9 +37,9 @@ public class Channel {
         return total;
     }
 
-    public void addNewDatausage(int userData, LocalDate date, String unitType){
+ /*   public void addNewDatausage(int userData, LocalDate date, String unitType){
     comsumptionData.add(new Datausage(userData, date, unitType));
-    }
+    }*/
 
     @Override
     public String toString() {

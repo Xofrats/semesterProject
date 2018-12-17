@@ -286,7 +286,7 @@ public class Ui extends Application {
 
 
 
-        
+
             close.setToggleGroup(group1);
             activate.setToggleGroup(group1);
 
