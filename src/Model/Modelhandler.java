@@ -1,66 +1,72 @@
 package Model;
 
-import Handlers.DataGenerator;
-import Handlers.meterHandler;
+
+import Handlers.MeterHandler;
 import Model.BBR.Bbr;
 import Handlers.BbrHandler;
 import Model.Meter.Meter;
-import Model.Meter.Channel;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Modelhandler {
 
+    //kalder meterhandler for at lave en ny måler
     public static void createMeter(int meterNumber, int active, Bbr bbr){
-        meterHandler.createMeterAuto(meterNumber, active, bbr);
+        MeterHandler.createMeterAuto(meterNumber, active, bbr);
     }
 
+    //kalder bbrhandler for at finde en bestemt bbr
     public static Bbr getBbr(int propertyNumber){
        Bbr gottenBbr = BbrHandler.getBbr(propertyNumber);
        return gottenBbr;
     }
 
+    //kalder meterhandler for at ændre en målerens status
     public static void toggleActive(int meterNumber){
-        meterHandler.toggleActive(meterNumber);
+        MeterHandler.toggleActive(meterNumber);
     }
 
+        //kalder meterhandler for at finde ud af en bestemt måler er aktiv
     public static int isActive(int meterNumber){
-        ArrayList<Meter> allMeter = meterHandler.getAllMeters();
+        ArrayList<Meter> allMeter = MeterHandler.getAllMeters();
         for (Meter meter: allMeter){
             if(meterNumber == meter.getNumber()){
                 return meter.getIsActive();
             }
         }
-
+        //Hvis der er indtastet noget forkert kommer værdien 3 tilbage, som er en fejlkode
         return 3;
     }
 
+    //kalder meter handler for at ændre en bestemt målers bbr
     public static void addBbrToMeter(int meterNumber, Bbr bbr){
-        meterHandler.addBbrToMeter(meterNumber, bbr);
+        MeterHandler.addBbrToMeter(meterNumber, bbr);
     }
 
+    //Finder alle mangler
     public static String validateData(){
-      String allErrors = meterHandler.dataValidation();
+      String allErrors = MeterHandler.dataValidation();
       return allErrors;
     }
 
+    //Finder en bestemt måler
     public static Meter getMeter(int meterNumber){
-        Meter gottenMeter = meterHandler.getMeter(meterNumber);
+        Meter gottenMeter = MeterHandler.getMeter(meterNumber);
         return gottenMeter;
     }
 
+    //Får alle målere
     public static ArrayList<Meter> getAllMeters(){
-        ArrayList<Meter> allMeters =  meterHandler.getAllMeters();
+        ArrayList<Meter> allMeters =  MeterHandler.getAllMeters();
         return allMeters;
     }
 
 
-
+    //LAver en CSV fil
     public static void createCsvFile(String fileName, String str) {
 
 

@@ -44,7 +44,7 @@ public static Channel randomChannel(String measureType,  int length, String unit
 // Random meter
     public static Meter randomMeter(){
         Random random = new Random();
-        Meter createdMeter = meterHandler.createMeterAuto(random.nextInt(9000) + 1, 1, BbrHandler.getAllBbr().get(random.nextInt(BbrHandler.getAllBbr().size())));
+        Meter createdMeter = MeterHandler.createMeterAuto(random.nextInt(9000) + 1, 1, BbrHandler.getAllBbr().get(random.nextInt(BbrHandler.getAllBbr().size())));
         return createdMeter;
     }
 

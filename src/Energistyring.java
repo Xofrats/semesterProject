@@ -1,6 +1,6 @@
 import Handlers.BbrHandler;
 import Handlers.DataGenerator;
-import Handlers.meterHandler;
+import Handlers.MeterHandler;
 import Javafx.Ui;
 import Model.Meter.Meter;
 
@@ -19,7 +19,7 @@ public class Energistyring {
         Meter meter3 = DataGenerator.randomMeter();
         meter3.addChannel(DataGenerator.randomChannel("water", 1, "temperature"));*/
 
-        System.out.println(meterHandler.dataValidation());
+        System.out.println(MeterHandler.dataValidation());
 
         //String output = meterHandler.allMetersOutput();
         // createCsvFile("c:/test/test3", output);
